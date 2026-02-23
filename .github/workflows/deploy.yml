@@ -36,22 +36,6 @@ jobs:
           tags: tag:server
           statedir: /tmp/tailscale-state
 
-      - name: Debug connectivity
-        run: |
-          ping -c 2 ${{ secrets.SERVER_HOST }}
-          ssh -o StrictHostKeyChecking=no -i <private_key_path> ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} hostname
-
-      - name: Test SSH over Tailscale
-        uses: appleboy/ssh-action@v1.2.5
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          port: 22
-          script: |
-            hostname
-            tailscale status
-
       - name: Deploy to Debian Server
         uses: appleboy/ssh-action@v1.2.5
         with:
