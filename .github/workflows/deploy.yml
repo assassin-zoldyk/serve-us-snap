@@ -36,6 +36,16 @@ jobs:
           tags: tag:server
           statedir: /tmp/tailscale-state
 
+      - name: Test SSH over Tailscale
+        uses: appleboy/ssh-action@v1.2.5
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            hostname
+            tailscale status
+
       - name: Deploy to Debian Server
         uses: appleboy/ssh-action@v1.2.5
         with:

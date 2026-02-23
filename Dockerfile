@@ -9,11 +9,12 @@ RUN pip install --no-cache-dir uv
 COPY pyproject.toml uv.lock ./
 
 # Install dependencies into system environment
-RUN uv sync --frozen --no-dev
+RUN uv sync --frozen --no-dev --system-site-packages
 
 # Copy app source
 COPY . .
 
 EXPOSE 8501
 
+# Command to run Streamlit
 CMD ["streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
