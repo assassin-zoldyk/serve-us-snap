@@ -43,11 +43,11 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            docker pull $IMAGE_NAME:latest
+            docker pull ${{ env.IMAGE_NAME }}:latest
             docker stop streamlit-app || true
             docker rm streamlit-app || true
             docker run -d \
               --name streamlit-app \
               -p 8501:8501 \
               --restart unless-stopped \
-              $IMAGE_NAME:latest
+              ${{ env.IMAGE_NAME }}:latest
