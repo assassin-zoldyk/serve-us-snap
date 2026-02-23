@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8501
 
 # Run Streamlit from UV virtualenv
-CMD ["/root/.uv/venv/bin/streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
+CMD ["uv", "run", "streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]
