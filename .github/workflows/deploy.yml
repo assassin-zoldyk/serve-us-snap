@@ -29,6 +29,12 @@ jobs:
       - name: Push Docker image
         run: docker push $IMAGE_NAME:latest
 
+      - name: Setup Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+
       - name: Deploy to Debian Server
         uses: appleboy/ssh-action@v1.0.3
         with:
